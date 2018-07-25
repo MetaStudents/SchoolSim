@@ -18,12 +18,15 @@ class Main extends Sprite {
     public static inline var y1 = s;
     public static inline var y2 = 600-3*m-s;
 
-    public var timeScale:Float = 2*3600*12; // sec to half-day (for now)
+    public var timeScale:Float = 3600*12; // sec to half-day (for now)
     public var gameDate:Date;
     public var mscheduleSpr:Calendar;
     public var wscheduleSpr:Schedule;
+    public var bar1:Bar;
+    public var bar2:Bar;
+    public var bar3:Bar;
     public var initialTimeStamp:Float;
-    
+
     public function new () {
 	
 	super ();
@@ -77,16 +80,34 @@ class Main extends Sprite {
 	this.addChild(classesSpr);
 	this.addChild(wscheduleSpr);
 
+	bar1 = new Bar(0.3, 60, 50, "class 1");
+	bar1.x = Math.round(x2/5);
+	bar1.y = y2;
+	bar2 = new Bar(0.5, 200, 50, "class 2");
+	bar2.x = Math.round(2*x2/5);
+	bar2.y = y2;
+	bar3 = new Bar(0.8, 400, 50, "class 3");
+	bar3.x = Math.round(3*x2/5);
+	bar3.y = y2;
+	classesSpr.addChild(bar1);
+	classesSpr.addChild(bar2);
+	classesSpr.addChild(bar3);
+
        	stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		
     }
 
     private function onEnterFrame (e:Event){
 	//initialTimeStamp is in seconds, but Date.fromTime takes milliseconds
-	gameDate = Date.fromTime(1000*(initialTimeStamp+timeScale*(Sys.time()-initialTimeStamp)));
+	var newGameDate = Date.fromTime(1000*(initialTimeStamp+timeScale*(Sys.time()-initialTimeStamp)));
 	//	trace(timeScale*(wut-initialTimeStamp));
+	var delta = (newGameDate.getTime() - gameDate.getTime())/1000;
+	gameDate = newGameDate;
 	mscheduleSpr.update(gameDate);
 	wscheduleSpr.update(gameDate);
+	bar1.update(delta);
+	bar2.update(delta);
+	bar3.update(delta);
     }
 	
 }
