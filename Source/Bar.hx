@@ -16,9 +16,13 @@ class Bar extends Sprite
     private var interestRate:Float;
     private var workRate:Float;
     private var working:Bool;
+    private var lectures:Array<Lecture>;
+    private var lectureNum:Int;
+    private var lectureEndDate:Date;
+    private var initGameDate:Date;
     // interestRate is the proportion of the total that increases per day
 
-    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String) {
+    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Array<Lecture>, gameDate:Date) {
 	super();
 
 	movable = new Sprite();
@@ -51,22 +55,40 @@ class Bar extends Sprite
 
 	this.interestRate = interestRate;
 	this.workRate = workRate;
+	this.lectures = lectures;
+	lectureNum = 0;
+	initGameDate = gameDate;
+       	lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[2]);
     }
 
-    public function update(delta:Float) {
+    public function update(gameDate:Date, delta:Float) {
     	accrueInterest(delta);
 	if (working){
-	    work(delta);
+ 	    work(delta);
 	}
+	getHomework(gameDate);
     }
 
     private function accrueInterest(delta:Float) {
-	trace(interestRate+" "+delta/(3600*24)+" "+movable.y);
+	//trace(interestRate+" "+delta/(3600*24)+" "+movable.y);
 	movable.y += interestRate*(delta/(3600*24))*movable.y; // make movable.y more negative
     }
 
     private function work(delta:Float) {
-	trace(workRate * delta/(3600*24));
+	//trace(workRate * delta/(3600*24));
         movable.y += workRate * delta/(3600*24);
+    }
+
+    private function getHomework(gameDate:Date){
+	if (lectureNum < lectures.length){
+	    if (gameDate.getTime() > lectureEndDate.getTime()){
+		trace(lectureNum+" "+lectureEndDate);
+		movable.y -= lectures[lectureNum].size;
+		lectureNum++;
+		if (lectureNum < lectures.length){
+		    lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[2]);
+		}
+	    }
+	}
     }
 }

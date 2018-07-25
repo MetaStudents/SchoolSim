@@ -101,10 +101,10 @@ class Calendar extends Sprite {
     }
 
     public function update(gameDate:Date) {
-	trace("hi");
+	//trace("hi");
 	var day = Day.fromDate(gameDate);
-	trace(today.month+" "+today.day);
-	trace(day.month+" "+day.day);
+	//trace(today.month+" "+today.day);
+	//trace(day.month+" "+day.day);
 	if (!today.equals(day)){
 	    if (gameDate.getDay()==0){
 		advanceGrid();
