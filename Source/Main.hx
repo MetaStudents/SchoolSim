@@ -27,10 +27,13 @@ class Main extends Sprite {
     public var bar1:Bar;
     public var bar2:Bar;
     public var bar3:Bar;
+    public var bar4:Bar;
+    public var bar5:Bar;
+    public var bar6:Bar;
     public var initialTimestamp:Float;
     public var initialGameTimestamp:Float;
     public var scheduleObject:Array<Array<Lecture>>;
-    //YYYY-MM-DD hh:mm:ss
+    public var colors:Array<Int>;
     
     public function new () {
 	
@@ -40,6 +43,8 @@ class Main extends Sprite {
 	trace(scheduleJson);
 	scheduleObject = Json.parse(scheduleJson);
 	trace(scheduleObject);
+
+	colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF];
 
 	/*
 	  var bitmapData = Assets.getBitmapData ("assets/openfl.png");
@@ -64,7 +69,7 @@ class Main extends Sprite {
 	var classesSpr = new Sprite();
 	classesSpr.x=2*xM+x1;
 	classesSpr.y=2*yM+y1;
-	wscheduleSpr = new Schedule(x3,y2, gameDate, scheduleObject);
+	wscheduleSpr = new Schedule(x3,y2, gameDate, scheduleObject, colors);
 	wscheduleSpr.x=3*xM+x1+x2;
 	wscheduleSpr.y=2*yM+y1;
 	
@@ -92,18 +97,36 @@ class Main extends Sprite {
 	this.addChild(classesSpr);
 	this.addChild(wscheduleSpr);
 
-	bar1 = new Bar(0.3, 60, 50, "class 1", scheduleObject[0], gameDate);
-	bar1.x = Math.round(x2/5);
+	bar1 = new Bar(0.01, 100, 50, "Drawing", scheduleObject[0], gameDate, colors[0]);
+	bar1.x = Math.round(x2/7);
 	bar1.y = y2;
-	bar2 = new Bar(0.5, 200, 50, "class 2", scheduleObject[1], gameDate);
-	bar2.x = Math.round(2*x2/5);
+	bar2 = new Bar(0.04, 100, 50, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
+	bar2.x = Math.round(2*x2/7);
 	bar2.y = y2;
-	bar3 = new Bar(0.8, 400, 50, "class 3", scheduleObject[2], gameDate);
-	bar3.x = Math.round(3*x2/5);
+	bar3 = new Bar(0.04, 100, 50, "EE Lab", scheduleObject[2], gameDate, colors[2]);
+	bar3.x = Math.round(3*x2/7);
 	bar3.y = y2;
+	bar4 = new Bar(0.04, 100, 50, "Chem", scheduleObject[3], gameDate, colors[3]);
+	bar4.x = Math.round(4*x2/7);
+	bar4.y = y2;
+	bar5 = new Bar(0.04, 100, 50, "Chem Lab", scheduleObject[4], gameDate, colors[4]);
+	bar5.x = Math.round(5*x2/7);
+	bar5.y = y2;
+	bar6 = new Bar(0.01, 100, 50, "How Things Work", scheduleObject[5], gameDate, colors[5]);
+	bar6.x = Math.round(6*x2/7);
+	bar6.y = y2;
+	trace(bar1.x+" "+bar1.y);
+	trace(bar2.x+" "+bar2.y);
+	trace(bar3.x+" "+bar3.y);
+	trace(bar4.x+" "+bar4.y);
+	trace(bar5.x+" "+bar5.y);
+	trace(bar6.x+" "+bar6.y);
 	classesSpr.addChild(bar1);
 	classesSpr.addChild(bar2);
 	classesSpr.addChild(bar3);
+	classesSpr.addChild(bar4);
+	classesSpr.addChild(bar5);
+	classesSpr.addChild(bar6);
 
        	stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 
@@ -120,6 +143,9 @@ class Main extends Sprite {
 	bar1.update(gameDate, delta);
 	bar2.update(gameDate, delta);
 	bar3.update(gameDate, delta);
+	bar4.update(gameDate, delta);
+	bar5.update(gameDate, delta);
+	bar6.update(gameDate, delta);
     }
 	
 }

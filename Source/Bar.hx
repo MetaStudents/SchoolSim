@@ -9,7 +9,7 @@ class Bar extends Sprite
 {
     private var nameHeight = 15;
     private var cursor:Shape;
-    private var barWidth = 40;
+    private var barWidth = 20;
     private var movable:Sprite;
     private var column:Shape;
     private var nameField:TextField;
@@ -22,14 +22,14 @@ class Bar extends Sprite
     private var initGameDate:Date;
     // interestRate is the proportion of the total that increases per day
 
-    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Array<Lecture>, gameDate:Date) {
+    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Array<Lecture>, gameDate:Date, color:Int=0x000000) {
 	super();
 
 	movable = new Sprite();
 	movable.x = movable.y = 0;
 	column = new Shape();
 	column.graphics.lineStyle(0);
-	column.graphics.beginFill(0x000000, 1);
+	column.graphics.beginFill(color, 1);
 	column.graphics.drawRect(Math.round(barWidth/2),0,barWidth,1000);
 	column.graphics.endFill();
 	movable.addChild(column);
@@ -58,7 +58,7 @@ class Bar extends Sprite
 	this.lectures = lectures;
 	lectureNum = 0;
 	initGameDate = gameDate;
-       	lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[2]);
+       	lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[1]);
     }
 
     public function update(gameDate:Date, delta:Float) {
@@ -82,11 +82,10 @@ class Bar extends Sprite
     private function getHomework(gameDate:Date){
 	if (lectureNum < lectures.length){
 	    if (gameDate.getTime() > lectureEndDate.getTime()){
-		trace(lectureNum+" "+lectureEndDate);
 		movable.y -= lectures[lectureNum].size;
 		lectureNum++;
 		if (lectureNum < lectures.length){
-		    lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[2]);
+		    lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[1]);
 		}
 	    }
 	}

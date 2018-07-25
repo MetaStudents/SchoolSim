@@ -22,11 +22,20 @@ class Schedule extends Sprite {
     private var week:Int;
 
     private var scheduleObject:Array<Array<Lecture>>;
+    private var colors:Array<Int>;
     
-    public function new (width, height, date:Date, scheduleObject:Array<Array<Lecture>>){
+    public function new (width, height, date:Date, scheduleObject:Array<Array<Lecture>>, colors:Array<Int>=null){
 	super();
 
 	this.scheduleObject = scheduleObject;
+	this.colors = colors;
+
+	if (colors == null || colors.length<scheduleObject.length){
+	    colors = new Array();
+	    for (i in 0...scheduleObject.length){
+		colors.push(0x000000);
+	    }
+	}
 	
 	today = Day.fromDate(date);
 		//round down to nearest Sunday to get endDate because nothing in schedule yet
@@ -78,13 +87,18 @@ class Schedule extends Sprite {
 	    cols.set(Day.fromDate(endDate),col);
 	    endDate = DateTools.delta(endDate, DateTools.days(1));
 	}
+	var colorNum = 0;
 	for (lectures in scheduleObject){
 	    for (lecture in lectures){
 		var times = lecture.times.split(" ");
 		var startNums = Util.splitAndParseInt(times[0], "/");
-		if (startNums[0]!=week){
+		//trace("hey");
+		if (startNums[0]<week){
+		    continue;
+		} else if(startNums[0]>week){
 		    break;
 		}
+		//trace("there");
 		var startFrac = (startNums[2]+startNums[3]/60)/24;
 		var yPos = yOffset + colHeight*startFrac;
 		var xPos = xOffset + startNums[1]*colWidth;
@@ -92,16 +106,15 @@ class Schedule extends Sprite {
 		var endFrac = (endNums[2]+endNums[3]/60)/24;
 		// We don't look at endNums[0] or endNums[1]
 		var h = colHeight*(endFrac-startFrac);
-
 		var lectureCol = new TextField();
 		addChild(lectureCol);
 
 		lectureCol.x = xPos;
 		lectureCol.y = yPos;
 		lectureCol.text = lecture.title;
-	    
+
 		lectureCol.background = true;
-		lectureCol.backgroundColor = 0x0000FF;
+		lectureCol.backgroundColor = colors[colorNum];
 		lectureCol.border = true;
 		lectureCol.borderColor = 0x000000;
 		lectureCol.width = colWidth;
@@ -109,6 +122,7 @@ class Schedule extends Sprite {
 		
 		lectureCols.push(lectureCol);
 	    }
+	    colorNum++;
 	}
 	this.addChild(cursor);
     }
