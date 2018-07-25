@@ -18,9 +18,10 @@ class Main extends Sprite {
     public static inline var y1 = s;
     public static inline var y2 = 600-3*m-s;
 
-    public var timeScale:Float = 3600*12; // sec to half-day (for now)
+    public var timeScale:Float = 2*3600*12; // sec to half-day (for now)
     public var gameDate:Date;
     public var mscheduleSpr:Calendar;
+    public var wscheduleSpr:Schedule;
     public var initialTimeStamp:Float;
     
     public function new () {
@@ -48,28 +49,28 @@ class Main extends Sprite {
 	var classesSpr = new Sprite();
 	classesSpr.x=2*xM+x1;
 	classesSpr.y=2*yM+y1;
-	var wscheduleSpr = new Sprite();
+	wscheduleSpr = new Schedule(x3,y2, gameDate);
 	wscheduleSpr.x=3*xM+x1+x2;
 	wscheduleSpr.y=2*yM+y1;
 	
 	//	var rectangle1 = new Shape();
 	var rectangle2 = new Shape();
 	var rectangle3 = new Shape();
-	var rectangle4 = new Shape();
+	//var rectangle4 = new Shape();
 	//rectangle1.graphics.lineStyle(2);
 	rectangle2.graphics.lineStyle(2);
 	rectangle3.graphics.lineStyle(2);
-	rectangle4.graphics.lineStyle(2);
+	//rectangle4.graphics.lineStyle(2);
 	
 	//rectangle1.graphics.drawRect(0,0, x2, y1); 
 	rectangle2.graphics.drawRect(0,0, x1, y2); 
 	rectangle3.graphics.drawRect(0,0, x2, y2);
-	rectangle4.graphics.drawRect(0,0, x3, y2); 
+	//	rectangle4.graphics.drawRect(0,0, x3, y2); 
 
 	//mscheduleSpr.addChild(rectangle1);
 	avatarSpr.addChild(rectangle2);
 	classesSpr.addChild(rectangle3);
-	wscheduleSpr.addChild(rectangle4);
+	//wscheduleSpr.addChild(rectangle4);
 	
 	this.addChild(mscheduleSpr);
 	this.addChild(avatarSpr);
@@ -85,6 +86,7 @@ class Main extends Sprite {
 	gameDate = Date.fromTime(1000*(initialTimeStamp+timeScale*(Sys.time()-initialTimeStamp)));
 	//	trace(timeScale*(wut-initialTimeStamp));
 	mscheduleSpr.update(gameDate);
+	wscheduleSpr.update(gameDate);
     }
 	
 }

@@ -21,6 +21,7 @@ class Calendar extends Sprite {
     public function new(width, height, date:Date){
 	super();
 	today = Day.fromDate(date);
+	//round down to nearest Sunday to get endDate because nothing in calendar yet
 	endDate = DateTools.delta(date, -DateTools.days(date.getDay()));
 	
 	xOffset = 0;
@@ -30,7 +31,7 @@ class Calendar extends Sprite {
 	rows = 2;
 	
 	makeGrid();
-	makeWeekdays(0, weekdayHeight, Math.round(width/7));
+	makeWeekdays();
 	cells.get(today).backgroundColor = 0xEE5D15;
     }
 
@@ -87,7 +88,7 @@ class Calendar extends Sprite {
 	}
     }
 
-    private function makeWeekdays(xOffset, yOffset, cellWidth) {
+    private function makeWeekdays() {
 	var names:Array<String> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (i in 0...7) {
 	    var weekday:TextField = new TextField();
