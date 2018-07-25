@@ -9,6 +9,7 @@ import haxe.ds.HashMap;
 class Schedule extends Sprite {
 
     private var cols:HashMap<Day,TextField> = new HashMap();
+    private var lectureCols:Array<TextField> = new Array();
     private var weekdayHeight = 15;
     private var today:Day;
     
@@ -18,9 +19,14 @@ class Schedule extends Sprite {
     private var colHeight:Int;
     private var endDate:Date; //first date not in calendar
     private var cursor:Shape;
+    private var week:Int;
+
+    private var scheduleObject:Array<Array<Lecture>>;
     
-    public function new (width, height, date:Date){
+    public function new (width, height, date:Date, scheduleObject:Array<Array<Lecture>>){
 	super();
+
+	this.scheduleObject = scheduleObject;
 	
 	today = Day.fromDate(date);
 		//round down to nearest Sunday to get endDate because nothing in schedule yet
@@ -40,6 +46,7 @@ class Schedule extends Sprite {
 	cursor.y = yOffset + colHeight*modDay(date);
 	this.addChild(cursor);
 
+	week = -1;
 	makeCols();
 	makeWeekdays();
 	cols.get(today).backgroundColor = 0xEE5D15;
@@ -51,6 +58,8 @@ class Schedule extends Sprite {
     }
     
     private function makeCols(){
+	week++;
+	
 	for (j in 0...7){
 	    var col:TextField = new TextField();
 	    addChild(col);
@@ -68,6 +77,38 @@ class Schedule extends Sprite {
 	    
 	    cols.set(Day.fromDate(endDate),col);
 	    endDate = DateTools.delta(endDate, DateTools.days(1));
+	}
+	for (lectures in scheduleObject){
+	    for (lecture in lectures){
+		var times = lecture.times.split(" ");
+		var startNums = Util.splitAndParseInt(times[0], "/");
+		if (startNums[0]!=week){
+		    break;
+		}
+		var startFrac = (startNums[2]+startNums[3]/60)/24;
+		var yPos = yOffset + colHeight*startFrac;
+		var xPos = xOffset + startNums[1]*colWidth;
+		var endNums = Util.splitAndParseInt(times[1], "/");
+		var endFrac = (endNums[2]+endNums[3]/60)/24;
+		// We don't look at endNums[0] or endNums[1]
+		var h = colHeight*(endFrac-startFrac);
+
+		var lectureCol = new TextField();
+		addChild(lectureCol);
+
+		lectureCol.x = xPos;
+		lectureCol.y = yPos;
+		lectureCol.text = lecture.title;
+	    
+		lectureCol.background = true;
+		lectureCol.backgroundColor = 0x0000FF;
+		lectureCol.border = true;
+		lectureCol.borderColor = 0x000000;
+		lectureCol.width = colWidth;
+		lectureCol.height = h;
+		
+		lectureCols.push(lectureCol);
+	    }
 	}
 	this.addChild(cursor);
     }
@@ -87,6 +128,9 @@ class Schedule extends Sprite {
     private function advanceCols(){
 	for (col in cols){
 		removeChild(col);
+	}
+	for (lectureCol in lectureCols){
+	    removeChild(lectureCol);
 	}
 	makeCols();
     }

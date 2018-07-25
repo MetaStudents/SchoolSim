@@ -10,14 +10,15 @@ import haxe.Json;
 
 class Main extends Sprite {
     public static inline var m = 10;
-    public static inline var s = 180;
+    public static inline var s1 = 150;
+    public static inline var s2 = 250;
     public static inline var xM = m;
     public static inline var yM = m;
-    public static inline var x1 = s;
-    public static inline var x2 = 800-4*m-2*s;
-    public static inline var x3 = s;
-    public static inline var y1 = s;
-    public static inline var y2 = 600-3*m-s;
+    public static inline var x1 = s1;
+    public static inline var x2 = 800-4*m-s1-s2;
+    public static inline var x3 = s2;
+    public static inline var y1 = s1;
+    public static inline var y2 = 600-3*m-s1;
 
     public var timeScale:Float = 3600*12; // sec to half-day (for now)
     public var gameDate:Date; // must be a Sunday
@@ -63,7 +64,7 @@ class Main extends Sprite {
 	var classesSpr = new Sprite();
 	classesSpr.x=2*xM+x1;
 	classesSpr.y=2*yM+y1;
-	wscheduleSpr = new Schedule(x3,y2, gameDate);
+	wscheduleSpr = new Schedule(x3,y2, gameDate, scheduleObject);
 	wscheduleSpr.x=3*xM+x1+x2;
 	wscheduleSpr.y=2*yM+y1;
 	
