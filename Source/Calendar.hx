@@ -35,36 +35,41 @@ class Calendar extends Sprite {
 	cells.get(today).backgroundColor = 0xEE5D15;
     }
 
+    private function makeRow (rowNum){
+	for (j in 0...7){
+	    
+	    var cell:TextField = new TextField();
+	    addChild(cell);
+	    
+	    cell.x = xOffset + j*cellWidth;
+	    cell.y = yOffset + rowNum*cellHeight;
+	    cell.text = Std.string(endDate.getDate());
+	    trace(endDate);
+	    if (endDate.getDate()==1){
+		var ms:Array<String> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var m = ms[endDate.getMonth()];
+		trace(ms);
+		trace(m);
+		cell.text += " "+m; 
+	    }
+	    
+	    cell.background = true;
+	    cell.backgroundColor = 0xFFFFFF;
+	    cell.border = true;
+	    cell.borderColor = 0x000000;
+	    cell.width = cellWidth;
+	    cell.height = cellHeight;
+
+	    cells.set(Day.fromDate(endDate),cell);
+		
+	    endDate = DateTools.delta(endDate, 24*3600*1000);//DateTools.days(1));
+	}
+    }
+
     private function makeGrid()
     {
 	for (i in 0...rows){
-	    for (j in 0...7){
-		
-		var cell:TextField = new TextField();
-		addChild(cell);
-		
-		cell.x = xOffset + j*cellWidth;
-		cell.y = yOffset + i*cellHeight;
-		cell.text = Std.string(endDate.getDate());
-		trace(endDate);
-		if (endDate.getDate()==1){
-		    var ms:Array<String> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		    var m = ms[endDate.getMonth()];
-		    trace(ms);
-		    trace(m);
-		    cell.text += " "+m; 
-		}
-
-		cell.background = true;
-		cell.backgroundColor = 0xFFFFFF;
-		cell.border = true;
-		cell.borderColor = 0x000000;
-		cell.width = cellWidth;
-		cell.height = cellHeight;
-
-		cells.set(Day.fromDate(endDate),cell);
-		endDate = DateTools.delta(endDate, 24*3600*1000);//DateTools.days(1));
-	    }
+	    makeRow(i);
 	}
     }
 
@@ -76,32 +81,7 @@ class Calendar extends Sprite {
 		cell.y -= cellHeight;
 	    }
 	}
-	for (j in 0...7){
-	    var cell:TextField = new TextField();
-	    addChild(cell);
-		
-	    cell.x = xOffset + j*cellWidth;
-	    cell.y = yOffset + (rows-1)*cellHeight;
-	    cell.text = Std.string(endDate.getDate());
-	    trace(endDate);
-	    if (endDate.getDate()==1){
-	       var ms:Array<String> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-	       var m = ms[endDate.getMonth()];
-	       trace(ms);
-	       trace(m);
-	       cell.text += " "+m; 
-	    }
-
-	    cell.background = true;
-	    cell.backgroundColor = 0xFFFFFF;
-	    cell.border = true;
-	    cell.borderColor = 0x000000;
-	    cell.width = cellWidth;
-	    cell.height = cellHeight;
-
-	    cells.set(Day.fromDate(endDate),cell);
-	    endDate = DateTools.delta(endDate, DateTools.days(1));
-	}
+	makeRow(rows-1);
     }
 
     private function makeWeekdays() {
