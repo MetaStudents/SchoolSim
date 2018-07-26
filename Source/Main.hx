@@ -54,6 +54,9 @@ class Main extends Sprite {
 	  bitmap.y = (stage.stageHeight - bitmap.height) / 2;
 	*/
         gameDate = new Date(2018, 9, 28, 0, 0, 0);
+	var gameDay = new Date(2018, 9, 28, 12, 0, 0);
+	//This is for the purpose of daylight savings.  Some days are 23 or 25 hours, so putting the time as noon will be stable WRT these changes.
+	
 	//trace(gameDate.getDay()); //Should be 0
 	initialTimestamp = Timer.stamp();
 	initialGameTimestamp = gameDate.getTime()/1000;
@@ -61,7 +64,7 @@ class Main extends Sprite {
 	trace(initialTimestamp);
 	trace(Date.now().getTime()/1000);
 	trace(Timer.stamp());
-	mscheduleSpr = new Calendar(x2,y1, gameDate);
+	mscheduleSpr = new Calendar(x2,y1, gameDay);
 	mscheduleSpr.x=2*xM+x1;
 	mscheduleSpr.y=yM;
 	var avatarSpr = new Sprite();
@@ -70,7 +73,7 @@ class Main extends Sprite {
 	var classesSpr = new Sprite();
 	classesSpr.x=2*xM+x1;
 	classesSpr.y=2*yM+y1;
-	wscheduleSpr = new Schedule(x3,y2, gameDate, scheduleObject, colors);
+	wscheduleSpr = new Schedule(x3,y2, gameDay, scheduleObject, colors);
 	wscheduleSpr.x=3*xM+x1+x2;
 	wscheduleSpr.y=2*yM+y1;
 	
