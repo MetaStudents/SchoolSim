@@ -46,6 +46,14 @@ class Calendar extends Sprite {
 		cell.x = xOffset + j*cellWidth;
 		cell.y = yOffset + i*cellHeight;
 		cell.text = Std.string(endDate.getDate());
+		trace(endDate);
+		if (endDate.getDate()==1){
+		    var ms:Array<String> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		    var m = ms[endDate.getMonth()];
+		    trace(ms);
+		    trace(m);
+		    cell.text += " "+m; 
+		}
 
 		cell.background = true;
 		cell.backgroundColor = 0xFFFFFF;
@@ -55,7 +63,7 @@ class Calendar extends Sprite {
 		cell.height = cellHeight;
 
 		cells.set(Day.fromDate(endDate),cell);
-		endDate = DateTools.delta(endDate, DateTools.days(1));
+		endDate = DateTools.delta(endDate, 24*3600*1000);//DateTools.days(1));
 	    }
 	}
     }
@@ -75,6 +83,14 @@ class Calendar extends Sprite {
 	    cell.x = xOffset + j*cellWidth;
 	    cell.y = yOffset + (rows-1)*cellHeight;
 	    cell.text = Std.string(endDate.getDate());
+	    trace(endDate);
+	    if (endDate.getDate()==1){
+	       var ms:Array<String> = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	       var m = ms[endDate.getMonth()];
+	       trace(ms);
+	       trace(m);
+	       cell.text += " "+m; 
+	    }
 
 	    cell.background = true;
 	    cell.backgroundColor = 0xFFFFFF;

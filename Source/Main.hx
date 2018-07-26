@@ -7,6 +7,7 @@ import openfl.display.Bitmap;
 import openfl.Assets;
 import openfl.events.Event;
 import haxe.Json;
+import haxe.Timer;
 
 class Main extends Sprite {
     public static inline var m = 10;
@@ -40,9 +41,7 @@ class Main extends Sprite {
 	super ();
 	
 	var scheduleJson = Assets.getText("assets/schedule.json");
-	trace(scheduleJson);
 	scheduleObject = Json.parse(scheduleJson);
-	trace(scheduleObject);
 
 	colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF];
 
@@ -54,12 +53,14 @@ class Main extends Sprite {
 	  bitmap.x = (stage.stageWidth - bitmap.width) / 2;
 	  bitmap.y = (stage.stageHeight - bitmap.height) / 2;
 	*/
-        gameDate = new Date(2018, 8, 23, 0, 0, 0);
+        gameDate = new Date(2018, 9, 28, 0, 0, 0);
 	//trace(gameDate.getDay()); //Should be 0
-	initialTimestamp = Sys.time();
+	initialTimestamp = Timer.stamp();
 	initialGameTimestamp = gameDate.getTime()/1000;
 	//trace(gameDate.getTime());
-	//trace(initialTimestamp);
+	trace(initialTimestamp);
+	trace(Date.now().getTime()/1000);
+	trace(Timer.stamp());
 	mscheduleSpr = new Calendar(x2,y1, gameDate);
 	mscheduleSpr.x=2*xM+x1;
 	mscheduleSpr.y=yM;
@@ -115,12 +116,6 @@ class Main extends Sprite {
 	bar6 = new Bar(0.01, 100, 50, "How Things Work", scheduleObject[5], gameDate, colors[5]);
 	bar6.x = Math.round(6*x2/7);
 	bar6.y = y2;
-	trace(bar1.x+" "+bar1.y);
-	trace(bar2.x+" "+bar2.y);
-	trace(bar3.x+" "+bar3.y);
-	trace(bar4.x+" "+bar4.y);
-	trace(bar5.x+" "+bar5.y);
-	trace(bar6.x+" "+bar6.y);
 	classesSpr.addChild(bar1);
 	classesSpr.addChild(bar2);
 	classesSpr.addChild(bar3);
@@ -134,7 +129,7 @@ class Main extends Sprite {
 
     private function onEnterFrame (e:Event){
 	//initialTimeStamp is in seconds, but Date.fromTime takes milliseconds
-	var newGameDate = Date.fromTime(1000*(initialGameTimestamp+timeScale*(Sys.time()-initialTimestamp)));
+	var newGameDate = Date.fromTime(1000*(initialGameTimestamp+timeScale*(Timer.stamp()-initialTimestamp)));
 	//	trace(timeScale*(wut-initialTimeStamp));
 	var delta = (newGameDate.getTime() - gameDate.getTime())/1000;
 	gameDate = newGameDate;
