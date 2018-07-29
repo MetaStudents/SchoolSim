@@ -1,11 +1,12 @@
 package;
 
-
 import openfl.display.Sprite;
 import openfl.display.Shape;
 import openfl.display.Bitmap;
 import openfl.Assets;
 import openfl.events.Event;
+import openfl.events.KeyboardEvent;
+import openfl.ui.Keyboard;
 import haxe.Json;
 import haxe.Timer;
 
@@ -33,14 +34,18 @@ class Main extends Sprite {
     public var bar6:Bar;
     public var initialTimestamp:Float;
     public var initialGameTimestamp:Float;
-    public var scheduleObject:Array<Array<Lecture>>;
+    public var scheduleObject:Array<Lecture.LectureObject>;
     public var colors:Array<Int>;
     
     public function new () {
 		super ();
 		
-		var scheduleJson = Assets.getText("assets/schedule.json");
-		scheduleObject = Json.parse(scheduleJson);
+		var scheduleJson = Assets.getText("assets/test.json");
+		var lectureArray:Array<Lecture> = Json.parse(scheduleJson);
+		var scheduleObject:Array<Lecture.LectureObject> = new Array<Lecture.LectureObject>();
+		for (lecture in lectureArray){
+			scheduleObject.push(new Lecture.LectureObject(lecture));
+		}
 		
 		colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF];
 		
@@ -100,10 +105,10 @@ class Main extends Sprite {
 		this.addChild(classesSpr);
 		this.addChild(wscheduleSpr);
 		
-		bar1 = new Bar(0.01, 100, 50, "Drawing", scheduleObject[0], gameDate, colors[0]);
+		bar1 = new Bar(0.04, 100, 50, "Drawing", scheduleObject[0], gameDate, colors[0]);
 		bar1.x = Math.round(x2/7);
 		bar1.y = y2;
-		bar2 = new Bar(0.04, 100, 50, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
+		/*bar2 = new Bar(0.04, 100, 50, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
 		bar2.x = Math.round(2*x2/7);
 		bar2.y = y2;
 		bar3 = new Bar(0.04, 100, 50, "EE Lab", scheduleObject[2], gameDate, colors[2]);
@@ -117,17 +122,25 @@ class Main extends Sprite {
 		bar5.y = y2;
 		bar6 = new Bar(0.01, 100, 50, "How Things Work", scheduleObject[5], gameDate, colors[5]);
 		bar6.x = Math.round(6*x2/7);
-		bar6.y = y2;
+		bar6.y = y2;*/
 		classesSpr.addChild(bar1);
-		classesSpr.addChild(bar2);
+		/*classesSpr.addChild(bar2);
 		classesSpr.addChild(bar3);
 		classesSpr.addChild(bar4);
 		classesSpr.addChild(bar5);
-		classesSpr.addChild(bar6);
+		classesSpr.addChild(bar6);*/
 		
 		stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+		stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
     }
 
+	private function onKeyDown(e:KeyboardEvent){
+		if (e.keyCode == Keyboard.ESCAPE){
+			var i:Int = 0;
+			while (i < 1000000) i++;
+		}
+	}
+	
     private function onEnterFrame (e:Event){
 		//initialTimeStamp is in seconds, but Date.fromTime takes milliseconds
 		var newGameDate = Date.fromTime(1000*(initialGameTimestamp+timeScale*(Timer.stamp()-initialTimestamp)));
@@ -137,11 +150,11 @@ class Main extends Sprite {
 		mscheduleSpr.update(gameDate);
 		wscheduleSpr.update(gameDate);
 		bar1.update(gameDate, delta);
-		bar2.update(gameDate, delta);
+		/*bar2.update(gameDate, delta);
 		bar3.update(gameDate, delta);
 		bar4.update(gameDate, delta);
 		bar5.update(gameDate, delta);
-		bar6.update(gameDate, delta);
+		bar6.update(gameDate, delta);*/
     }
 	
 }

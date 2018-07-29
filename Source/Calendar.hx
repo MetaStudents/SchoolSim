@@ -75,9 +75,9 @@ class Calendar extends Sprite {
     private function advanceGrid(){
 		for (cell in cells){
 			if (cell.y <= yOffset){
-			removeChild(cell);
+				removeChild(cell);
 			} else {
-			cell.y -= cellHeight;
+				cell.y -= cellHeight;
 			}
 		}
 		makeRow(rows-1);

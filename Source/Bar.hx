@@ -16,13 +16,13 @@ class Bar extends Sprite
     private var interestRate:Float;
     private var workRate:Float;
     private var working:Bool;
-    private var lectures:Array<Lecture>;
+    private var lectures:Lecture.LectureObject;
     private var lectureNum:Int;
     private var lectureEndDate:Date;
     private var initGameDate:Date;
     // interestRate is the proportion of the total that increases per day
 
-    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Array<Lecture>, gameDate:Date, color:Int=0x000000) {
+    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Lecture.LectureObject, gameDate:Date, color:Int=0x000000) {
 		super();
 		
 		movable = new Sprite();
@@ -59,7 +59,7 @@ class Bar extends Sprite
 		this.lectures = lectures;
 		lectureNum = 0;
 		initGameDate = gameDate;
-		lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[1]);
+		lectureEndDate = lectures.startDate;
     }
 
     public function update(gameDate:Date, delta:Float) {
@@ -81,14 +81,24 @@ class Bar extends Sprite
     }
 
     private function getHomework(gameDate:Date){
-		if (lectureNum < lectures.length){
-			if (gameDate.getTime() > lectureEndDate.getTime()){
-			movable.y -= lectures[lectureNum].size;
+		if (gameDate.getTime() < lectures.endDate.getTime() && gameDate.getTime() > lectureEndDate.getTime()){
+			movable.y -= lectures.size;
 			lectureNum++;
-				if (lectureNum < lectures.length){
-					lectureEndDate = Util.jsonTimeToDate(initGameDate, lectures[lectureNum].times.split(" ")[1]);
-				}
-			}
+			lectureEndDate = nextHomework(gameDate);
 		}
-    }
+	}
+	
+	//Returns the next date that a homwork will be due/lecture will occur
+	private function nextHomework(gameDate:Date) : Date {
+		var nextDate = DateTools.delta(gameDate, DateTools.days(1));
+		while (Util.DayinRange(lectures.startDate, lectures.endDate, nextDate)){
+			trace(nextDate);
+			if (((lectures.days >> (6 - nextDate.getDay())) & 1) == 1){
+				trace("found");
+				return nextDate;
+			}
+			nextDate = DateTools.delta(nextDate, DateTools.days(1));
+		}
+		return null; 
+	}
 }

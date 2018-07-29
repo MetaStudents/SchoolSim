@@ -21,13 +21,13 @@ class Schedule extends Sprite {
     private var cursor:Shape;
     private var week:Int;
 
-    private var scheduleObject:Array<Array<Lecture>>;
+    private var scheduleObject:Array<Lecture.LectureObject>;
     private var colors:Array<Int>;
 
     private var textHeight:Int;
     private var format:TextFormat;
     
-    public function new (width, height, date:Date, scheduleObject:Array<Array<Lecture>>, colors:Array<Int>=null){
+    public function new (width, height, date:Date, scheduleObject:Array<Lecture.LectureObject>, colors:Array<Int>=null){
 		super();
 		
 		this.scheduleObject = scheduleObject;
@@ -36,7 +36,7 @@ class Schedule extends Sprite {
 		if (colors == null || colors.length<scheduleObject.length){
 			colors = new Array();
 			for (i in 0...scheduleObject.length){
-			colors.push(0x000000);
+				colors.push(0x000000);
 			}
 		}
 		
@@ -93,24 +93,28 @@ class Schedule extends Sprite {
 			endDate = DateTools.delta(endDate, DateTools.days(1));
 		}
 		
-		var colorNum = 0;
-		for (lectures in scheduleObject){
-			for (lecture in lectures){
-				var times = lecture.times.split(" ");
-				var startNums = Util.splitAndParseInt(times[0], "/");
-				//trace("hey");
-				if (startNums[0]<week){
+		var cursorDate = new Date(today.year, today.month, today.day, 0, 0, 0);
+		cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
+		for (j in 0...7){
+			var colorNum = 0;
+			cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
+			for (lecture in scheduleObject){
+				// If lecture is not held on that day continue to next lecture
+				if (!((lecture.days >> (6 - j)) & 1 == 1))
 					continue;
-				} else if(startNums[0]>week){
-					break;
-				}
-				//trace("there");
-				var startFrac = (startNums[2]+startNums[3]/60)/24;
+				// If lecture is not held within the range of this week 
+				if (!Util.DayinRange(lecture.startDate, lecture.endDate, cursorDate))
+					continue;
+				// Lecture will be added since it is on this day in range
+				var time = lecture.interval.split("-");
+				var start = Util.splitAndParseInt(time[0], ":");
+				var end = Util.splitAndParseInt(time[1], ":");
+				
+				var startFrac = (start[0] + start[1] / 60) / 24;
 				var yPos = yOffset + colHeight*startFrac;
-				var xPos = xOffset + startNums[1]*colWidth;
-				var endNums = Util.splitAndParseInt(times[1], "/");
-				var endFrac = (endNums[2]+endNums[3]/60)/24;
-				// We don't look at endNums[0] or endNums[1]
+				var xPos = xOffset + j * colWidth;
+				
+				var endFrac = (end[0] + end[1] / 60) / 24;
 				var h = colHeight*(endFrac-startFrac);
 				var lectureCol = new TextField();
 				addChild(lectureCol);
@@ -127,8 +131,8 @@ class Schedule extends Sprite {
 				lectureCol.height = h;
 				
 				lectureCols.push(lectureCol);
+				colorNum++;
 			}
-			colorNum++;
 		}
 		this.addChild(cursor);
     }
@@ -177,7 +181,7 @@ class Schedule extends Sprite {
 		//	trace(day.month+" "+day.day);
 		if (!today.equals(day)){
 			if (gameDate.getDay()==0){
-			advanceCols();
+				advanceCols();
 			}
 			cols.get(day).backgroundColor = 0xEE5D15;
 			cols.get(today).backgroundColor = 0xFFFFFF;

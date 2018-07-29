@@ -1,0 +1,18 @@
+[
+  {
+	"days" : 6,
+	"interval" : "11:30-13:20",
+	"start" : {
+		"day": 30,
+		"month":9,
+		"year": 2018
+	},
+	"end" : {
+		"day": 1,
+		"month":2,
+		"year": 2019
+	},
+	"size" : 10,
+	"title" : "Drawing"
+  }
+]

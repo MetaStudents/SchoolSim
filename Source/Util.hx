@@ -16,4 +16,11 @@ class Util {
 		var minutes = nums[3];//Std.parseInt(nums[3]);
 		return DateTools.delta(gameDate, 1000*60*(minutes+60*(hours+24*(days+7*weeks))));
     }
+	
+	public static function DayinRange(startDate:Date, endDate:Date, date:Date): Bool{
+		var start:Float = startDate.getTime();
+		var end:Float = endDate.getTime();
+		var day:Float = date.getTime();
+		return day >= start && day <= end;
+	}
 }
