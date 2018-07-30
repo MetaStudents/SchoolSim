@@ -23,6 +23,9 @@ class Schedule extends Sprite {
 
     private var scheduleObject:Array<Array<Lecture>>;
     private var colors:Array<Int>;
+
+    private var textHeight:Int;
+    private var format:TextFormat;
     
     public function new (width, height, date:Date, scheduleObject:Array<Array<Lecture>>, colors:Array<Int>=null){
 		super();
@@ -45,6 +48,8 @@ class Schedule extends Sprite {
 		yOffset = weekdayHeight;
 		colWidth = Math.round(width/7);
 		colHeight = height-weekdayHeight;
+		textHeight = 10;
+		format = new TextFormat(textHeight);
 		
 		cursor = new Shape();
 		cursor.graphics.lineStyle(0);
@@ -58,6 +63,7 @@ class Schedule extends Sprite {
 		week = -1;
 		makeCols();
 		makeWeekdays();
+		makeTimes();
 		cols.get(today).backgroundColor = 0xEE5D15;
     }
 
@@ -134,9 +140,24 @@ class Schedule extends Sprite {
 			addChild(weekday);
 			
 			weekday.text = names[i];
+			weekday.setTextFormat(format);
 			weekday.x = xOffset + i*colWidth;
 			weekday.y = yOffset - 15;
 		}
+    }
+
+
+    private function makeTimes() {
+	var times:Array<String> = ["12am", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am"];
+	for (i in 0...25) {
+	    var time:TextField = new TextField();
+	    addChild(time);
+
+	    time.text = times[i];
+	    time.setTextFormat(format);
+	    time.x = 0;
+	    time.y = yOffset - (textHeight) + i*colHeight/24;
+	}
     }
     
     private function advanceCols(){

@@ -38,6 +38,7 @@ class Bar extends Sprite
 		nameField.text = nameStr;
 		nameField.x = Math.round(barWidth/2);
 		nameField.y = -nameHeight;
+		nameField.selectable = false;
 		movable.addChild(nameField);
 		
 		addChild(movable);
