@@ -21,7 +21,7 @@ class Main extends Sprite {
     public static inline var y1 = s1;
     public static inline var y2 = 600-3*m-s1;
 
-    public var timeScale:Float = 3600*12; // sec to half-day (for now)
+    public var timeScale:Float = 3600*6;
     public var gameDate:Date; // must be a Sunday
     public var mscheduleSpr:Calendar;
     public var wscheduleSpr:Schedule;
@@ -101,22 +101,22 @@ class Main extends Sprite {
 	this.addChild(classesSpr);
 	this.addChild(wscheduleSpr);
 
-	bar1 = new Bar(0.01, 100, 50, "Drawing", scheduleObject[0], gameDate, colors[0]);
+	bar1 = new Bar(0.01, 100, 0, "Drawing", scheduleObject[0], gameDate, colors[0]);
 	bar1.x = Math.round(x2/7);
 	bar1.y = y2;
-	bar2 = new Bar(0.04, 100, 50, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
+	bar2 = new Bar(0.2, 100, 0, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
 	bar2.x = Math.round(2*x2/7);
 	bar2.y = y2;
-	bar3 = new Bar(0.04, 100, 50, "EE Lab", scheduleObject[2], gameDate, colors[2]);
+	bar3 = new Bar(0.2, 100, 0, "EE Lab", scheduleObject[2], gameDate, colors[2]);
 	bar3.x = Math.round(3*x2/7);
 	bar3.y = y2;
-	bar4 = new Bar(0.04, 100, 50, "Chem", scheduleObject[3], gameDate, colors[3]);
+	bar4 = new Bar(0.2, 100, 0, "Chem", scheduleObject[3], gameDate, colors[3]);
 	bar4.x = Math.round(4*x2/7);
 	bar4.y = y2;
-	bar5 = new Bar(0.04, 100, 50, "Chem Lab", scheduleObject[4], gameDate, colors[4]);
+	bar5 = new Bar(0.04, 100, 0, "Chem Lab", scheduleObject[4], gameDate, colors[4]);
 	bar5.x = Math.round(5*x2/7);
 	bar5.y = y2;
-	bar6 = new Bar(0.01, 100, 50, "How Things Work", scheduleObject[5], gameDate, colors[5]);
+	bar6 = new Bar(0.01, 100, 0, "How Things Work", scheduleObject[5], gameDate, colors[5]);
 	bar6.x = Math.round(6*x2/7);
 	bar6.y = y2;
 	classesSpr.addChild(bar1);
