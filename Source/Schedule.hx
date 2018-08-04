@@ -96,7 +96,6 @@ class Schedule extends Sprite {
 		var cursorDate = new Date(today.year, today.month, today.day, 0, 0, 0);
 		cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
 		for (j in 0...7){
-			var colorNum = 0;
 			cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
 			for (lecture in scheduleObject){
 				// If lecture is not held on that day continue to next lecture
@@ -125,14 +124,13 @@ class Schedule extends Sprite {
 				lectureCol.text = lecture.title;
 				
 				lectureCol.background = true;
-				lectureCol.backgroundColor = colors[colorNum];
+				lectureCol.backgroundColor = colors[scheduleObject.indexOf(lecture)];
 				lectureCol.border = true;
 				lectureCol.borderColor = 0x000000;
 				lectureCol.width = colWidth;
 				lectureCol.height = h;
 				
 				lectureCols.push(lectureCol);
-				colorNum++;
 			}
 		}
 		this.addChild(cursor);

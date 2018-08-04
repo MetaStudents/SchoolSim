@@ -2,12 +2,12 @@
   {
     "days": [
       {
-        "weekday": 4,
-        "time": "13:30-15:20"
+        "weekday": 2,
+        "time": "11:30-13:20"
       },
       {
-        "weekday": 5,
-        "time": "10:30-12:30"
+        "weekday": 4,
+        "time": "13:30-15:20"
       }
     ],
     "start": {
@@ -57,6 +57,7 @@
       [5, 4],
       [30, 3]
     ],
+    "project": 1000,
     "title": "Evolution and Ecology"
   },
   {
@@ -79,6 +80,7 @@
     "homework": [
       [60, 10]
     ],
+    "project": 0,
     "title": "EE Lab"
   },
   {
@@ -111,6 +113,7 @@
       [5, 4],
       [30, 3]
     ],
+    "project": 0,
     "title": "Chem"
   },
   {
@@ -133,6 +136,7 @@
     "homework": [
       [60, 10]
     ],
+    "project": 0,
     "title": "Chem Lab"
   },
   {
@@ -157,8 +161,10 @@
       "year": 2019
     },
     "homework": [
+      [0, 2],
       [10, 20]
     ],
+    "project": 0,
     "title": "How Things Work"
   }
 ]

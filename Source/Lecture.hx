@@ -5,6 +5,7 @@ typedef Lecture = {
     var start:SSDate;
     var end:SSDate;
     var homework:Array<Array<Int>>;
+    var project:Int;
     var title:String;
 }
 
