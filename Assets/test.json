@@ -1,26 +1,146 @@
 [
   {
-	"days" : [
-		{
-			"weekday" : 4,
-			"time" : "13:30-15:20"
-		},
-		{
-			"weekday" : 5,
-			"time" : "10:30-12:30"
-		}
-	],
-	"start" : {
-		"day": 30,
-		"month":9,
-		"year": 2018
-	},
-	"end" : {
-		"day": 1,
-		"month":2,
-		"year": 2019
-	},
-	"size" : 10,
-	"title" : "Drawing"
+    "days": [
+      {
+        "weekday": 4,
+        "time": "13:30-15:20"
+      },
+      {
+        "weekday": 5,
+        "time": "10:30-12:30"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 10,
+    "title": "Drawing"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "10:30-11:20"
+      },
+      {
+        "weekday": 3,
+        "time": "10:30-11:20"
+      },
+      {
+        "weekday": 5,
+        "time": "10:30-11:20"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 25,
+    "title": "Evolution and Ecology"
+  },
+  {
+    "days": [
+      {
+        "weekday": 2,
+        "time": "17:00-19:50"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 60,
+    "title": "EE Lab"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "9:30-10:20"
+      },
+      {
+        "weekday": 3,
+        "time": "9:30-10:20"
+      },
+      {
+        "weekday": 5,
+        "time": "9:30-10:20"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 25,
+    "title": "Chem"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "18:00-20:50"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 60,
+    "title": "Chem Lab"
+  },
+  {
+    "days": [
+      {
+        "weekday": 2,
+        "time": "15:30-16:50"
+      },
+      {
+        "weekday": 4,
+        "time": "15:30-16:50"
+      }
+    ],
+    "start": {
+      "day": 30,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 2,
+      "year": 2019
+    },
+    "size": 10,
+    "title": "How Things Work"
   }
 ]
