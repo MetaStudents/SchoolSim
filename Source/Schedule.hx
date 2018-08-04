@@ -64,7 +64,7 @@ class Schedule extends Sprite {
 	makeCols();
 	makeWeekdays();
 	makeTimes();
-	cols.get(today).backgroundColor = 0xEE5D15;
+	cols.get(today).backgroundColor = 0x55FFFF;
 	
     }
 
@@ -179,7 +179,7 @@ class Schedule extends Sprite {
 	    if (gameDate.getDay()==0){
 		advanceCols();
 	    }
-	    cols.get(day).backgroundColor = 0xEE5D15;
+	    cols.get(day).backgroundColor = 0x55FFFF;
 	    cols.get(today).backgroundColor = 0xFFFFFF;
 	    today=day;
 	}
