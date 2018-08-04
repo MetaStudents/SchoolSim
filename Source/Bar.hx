@@ -63,7 +63,7 @@ class Bar extends Sprite
 	if (lectureNum < lectures.length){
 	    if (gameDate.getTime() > lectureEndDate.getTime()){
 		var size = lectures[lectureNum].size;
-		var assignment = new Assignment(size, heights[heights.length-1], color, barWidth, interestRate, workRate);
+		var assignment = new Assignment(size, heights[numAssignments], color, barWidth, interestRate, workRate);
 		assignments.push(assignment);
 		this.addChild(assignment);
 		lectureNum++;
