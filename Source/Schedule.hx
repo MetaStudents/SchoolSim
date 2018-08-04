@@ -44,9 +44,9 @@ class Schedule extends Sprite {
 			//round down to nearest Sunday to get endDate because nothing in schedule yet
 		endDate = DateTools.delta(date, -DateTools.days(date.getDay()));
 		
-		xOffset = 0;
+		xOffset = 40;
 		yOffset = weekdayHeight;
-		colWidth = Math.round(width/7);
+		colWidth = Math.round((width-xOffset)/7);
 		colHeight = height-weekdayHeight;
 		textHeight = 10;
 		format = new TextFormat(textHeight);
