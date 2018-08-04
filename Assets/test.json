@@ -20,7 +20,11 @@
       "month": 2,
       "year": 2019
     },
-    "size": 10,
+    "homework": [
+      [20, 6],
+      [10, 4],
+      [30, 3]
+    ],
     "title": "Drawing"
   },
   {
@@ -48,7 +52,11 @@
       "month": 2,
       "year": 2019
     },
-    "size": 25,
+    "homework": [
+      [25, 6],
+      [5, 4],
+      [30, 3]
+    ],
     "title": "Evolution and Ecology"
   },
   {
@@ -68,7 +76,9 @@
       "month": 2,
       "year": 2019
     },
-    "size": 60,
+    "homework": [
+      [60, 10]
+    ],
     "title": "EE Lab"
   },
   {
@@ -96,7 +106,11 @@
       "month": 2,
       "year": 2019
     },
-    "size": 25,
+    "homework": [
+      [25, 6],
+      [5, 4],
+      [30, 3]
+    ],
     "title": "Chem"
   },
   {
@@ -116,7 +130,9 @@
       "month": 2,
       "year": 2019
     },
-    "size": 60,
+    "homework": [
+      [60, 10]
+    ],
     "title": "Chem Lab"
   },
   {
@@ -140,7 +156,9 @@
       "month": 2,
       "year": 2019
     },
-    "size": 10,
+    "homework": [
+      [10, 20]
+    ],
     "title": "How Things Work"
   }
 ]

@@ -19,6 +19,7 @@ class Bar extends Sprite {
     private var lectureEndDate:Date;
     private var initGameDate:Date;
     private var color:Int;
+    private var currentHomework:Int;
 
     // interestRate is the proportion of the total that increases per day
 
@@ -38,6 +39,7 @@ class Bar extends Sprite {
         lectureNum = 0;
         initGameDate = gameDate;
         lectureEndDate = lectures.startDate;
+        currentHomework = 0;
     }
 
     public function update(gameDate:Date, delta:Float) {
@@ -59,14 +61,19 @@ class Bar extends Sprite {
     }
 
     private function getHomework(gameDate:Date) {
-        if (gameDate.getTime() < lectures.endDate.getTime() && gameDate.getTime() > lectureEndDate.getTime()) {
-            var size = lectures.size;
-            var assignment = new Assignment(size, heights[numAssignments], color, barWidth, interestRate, workRate);
-            assignments.push(assignment);
-            this.addChild(assignment);
-            lectureNum++;
-            lectureEndDate = nextHomework(gameDate);
-            numAssignments++;
+        if (currentHomework < lectures.homework.length) {
+            if (gameDate.getTime() < lectures.endDate.getTime() && gameDate.getTime() > lectureEndDate.getTime()) {
+                var size = lectures.homework[currentHomework][0];
+                var assignment = new Assignment(size, heights[numAssignments], color, barWidth, interestRate, workRate);
+                assignments.push(assignment);
+                this.addChild(assignment);
+                lectureNum++;
+                lectureEndDate = nextHomework(gameDate);
+                numAssignments++;
+                lectures.homework[currentHomework][1]--;
+                if (lectures.homework[currentHomework][1] == 0)
+                    currentHomework++;
+            }
         }
     }
 
