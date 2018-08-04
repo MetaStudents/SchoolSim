@@ -22,7 +22,8 @@ class Bar extends Sprite
     private var initGameDate:Date;
     // interestRate is the proportion of the total that increases per day
 
-    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, lectures:Lecture.LectureObject, gameDate:Date, color:Int=0x000000) {
+    public function new(interestRate:Float, workRate:Float, startHeight:Int, nameStr:String, 
+	        lectures:Lecture.LectureObject, gameDate:Date, color:Int=0x000000) {
 		super();
 		
 		movable = new Sprite();
@@ -90,15 +91,19 @@ class Bar extends Sprite
 	
 	//Returns the next date that a homwork will be due/lecture will occur
 	private function nextHomework(gameDate:Date) : Date {
-		var nextDate = DateTools.delta(gameDate, DateTools.days(1));
-		while (Util.DayinRange(lectures.startDate, lectures.endDate, nextDate)){
-			trace(nextDate);
-			if (((lectures.days >> (6 - nextDate.getDay())) & 1) == 1){
-				trace("found");
-				return nextDate;
-			}
-			nextDate = DateTools.delta(nextDate, DateTools.days(1));
+		var nextIndex = (lectures.weekdays.indexOf(gameDate.getDay()) + 1) % lectures.weekdays.length;
+		var next = lectures.weekdays[nextIndex];
+		var nextStart = Util.splitAndParseInt(lectures.times[nextIndex].split("-")[0], ":");
+		
+		var delta:Float = next - gameDate.getDay();
+		if (delta <= 0) {
+			delta = 7 + delta;
 		}
+		delta = DateTools.days(delta) + DateTools.hours(nextStart[0] - gameDate.getHours()) + DateTools.minutes(nextStart[1] - gameDate.getMinutes());
+		
+		var nextDate = DateTools.delta(gameDate, delta);
+		if (Util.DayinRange(lectures.startDate, lectures.endDate, nextDate))
+			return nextDate;
 		return null; 
 	}
 }

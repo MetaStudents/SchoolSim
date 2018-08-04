@@ -100,13 +100,14 @@ class Schedule extends Sprite {
 			cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
 			for (lecture in scheduleObject){
 				// If lecture is not held on that day continue to next lecture
-				if (!((lecture.days >> (6 - j)) & 1 == 1))
+				if (lecture.weekdays.indexOf(j) == -1)
 					continue;
+				var index = lecture.weekdays.indexOf(j);
 				// If lecture is not held within the range of this week 
 				if (!Util.DayinRange(lecture.startDate, lecture.endDate, cursorDate))
 					continue;
 				// Lecture will be added since it is on this day in range
-				var time = lecture.interval.split("-");
+				var time = lecture.times[index].split("-");
 				var start = Util.splitAndParseInt(time[0], ":");
 				var end = Util.splitAndParseInt(time[1], ":");
 				

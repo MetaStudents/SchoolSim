@@ -1,7 +1,15 @@
 [
   {
-	"days" : 6,
-	"interval" : "11:30-13:20",
+	"days" : [
+		{
+			"weekday" : 4,
+			"time" : "13:30-15:20"
+		},
+		{
+			"weekday" : 5,
+			"time" : "10:30-12:30"
+		}
+	],
 	"start" : {
 		"day": 30,
 		"month":9,
