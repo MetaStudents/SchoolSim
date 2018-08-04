@@ -47,7 +47,7 @@ class Main extends Sprite {
 			scheduleObject.push(new Lecture.LectureObject(lecture));
 		}
 
-		colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF];
+		colors = [0xFF7800, 0x00FF00, 0x5555FF, 0xFFFF00, 0xFF00FF, 0xE3D3FF];
 
 		/*
 		  var bitmapData = Assets.getBitmapData ("assets/openfl.png");

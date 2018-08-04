@@ -70,6 +70,6 @@ class Assignment extends Sprite {
 
     private function work(delta:Float) {
         workSize += workRate * delta / (3600 * 24);
-        drawRectangle(workRect, workSize, 0x555555);
+        drawRectangle(workRect, workSize, 0x897ea9);
     }
 }

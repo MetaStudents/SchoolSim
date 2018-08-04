@@ -29,28 +29,28 @@ class Schedule extends Sprite {
     
     public function new (width, height, date:Date, scheduleObject:Array<Lecture.LectureObject>, colors:Array<Int>=null){
 		super();
-		
+
 		this.scheduleObject = scheduleObject;
 		this.colors = colors;
-		
+
 		if (colors == null || colors.length<scheduleObject.length){
 			colors = new Array();
 			for (i in 0...scheduleObject.length){
 				colors.push(0x000000);
 			}
 		}
-		
+
 		today = Day.fromDate(date);
 			//round down to nearest Sunday to get endDate because nothing in schedule yet
 		endDate = DateTools.delta(date, -DateTools.days(date.getDay()));
-		
+
 		xOffset = 40;
 		yOffset = weekdayHeight;
 		colWidth = Math.round((width-xOffset)/7);
 		colHeight = height-weekdayHeight;
 		textHeight = 10;
 		format = new TextFormat(textHeight);
-		
+
 		cursor = new Shape();
 		cursor.graphics.lineStyle(0);
 		cursor.graphics.beginFill(0x00FF00, 1);
@@ -59,12 +59,12 @@ class Schedule extends Sprite {
 		cursor.x = xOffset + colWidth*date.getDay();
 		cursor.y = yOffset + colHeight*modDay(date);
 		this.addChild(cursor);
-		
+
 		week = -1;
 		makeCols();
 		makeWeekdays();
 		makeTimes();
-		cols.get(today).backgroundColor = 0xEE5D15;
+		cols.get(today).backgroundColor = 0x55FFFF;
     }
 
     private function modDay(date:Date):Float {
@@ -73,26 +73,26 @@ class Schedule extends Sprite {
     
     private function makeCols(){
 		week++;
-		
+
 		for (j in 0...7){
 			var col:TextField = new TextField();
 			addChild(col);
-			
+
 			col.x = xOffset + j*colWidth;
 			col.y = yOffset;
 			col.text = Std.string(endDate.getDate());
-			
+
 			col.background = true;
 			col.backgroundColor = 0xFFFFFF;
 			col.border = true;
 			col.borderColor = 0x000000;
 			col.width = colWidth;
 			col.height = colHeight;
-			
+
 			cols.set(Day.fromDate(endDate),col);
 			endDate = DateTools.delta(endDate, DateTools.days(1));
 		}
-		
+
 		var cursorDate = new Date(today.year, today.month, today.day, 0, 0, 0);
 		cursorDate = DateTools.delta(cursorDate, DateTools.days(1));
 		for (j in 0...7){
@@ -102,34 +102,34 @@ class Schedule extends Sprite {
 				if (lecture.weekdays.indexOf(j) == -1)
 					continue;
 				var index = lecture.weekdays.indexOf(j);
-				// If lecture is not held within the range of this week 
+				// If lecture is not held within the range of this week
 				if (!Util.DayinRange(lecture.startDate, lecture.endDate, cursorDate))
 					continue;
 				// Lecture will be added since it is on this day in range
 				var time = lecture.times[index].split("-");
 				var start = Util.splitAndParseInt(time[0], ":");
 				var end = Util.splitAndParseInt(time[1], ":");
-				
+
 				var startFrac = (start[0] + start[1] / 60) / 24;
 				var yPos = yOffset + colHeight*startFrac;
 				var xPos = xOffset + j * colWidth;
-				
+
 				var endFrac = (end[0] + end[1] / 60) / 24;
 				var h = colHeight*(endFrac-startFrac);
 				var lectureCol = new TextField();
 				addChild(lectureCol);
-				
+
 				lectureCol.x = xPos;
 				lectureCol.y = yPos;
 				lectureCol.text = lecture.title;
-				
+
 				lectureCol.background = true;
 				lectureCol.backgroundColor = colors[scheduleObject.indexOf(lecture)];
 				lectureCol.border = true;
 				lectureCol.borderColor = 0x000000;
 				lectureCol.width = colWidth;
 				lectureCol.height = h;
-				
+
 				lectureCols.push(lectureCol);
 			}
 		}
@@ -141,7 +141,7 @@ class Schedule extends Sprite {
 		for (i in 0...7) {
 			var weekday:TextField = new TextField();
 			addChild(weekday);
-			
+
 			weekday.text = names[i];
 			weekday.setTextFormat(format);
 			weekday.x = xOffset + i*colWidth;
@@ -182,7 +182,7 @@ class Schedule extends Sprite {
 			if (gameDate.getDay()==0){
 				advanceCols();
 			}
-			cols.get(day).backgroundColor = 0xEE5D15;
+			cols.get(day).backgroundColor = 0x55FFFF;
 			cols.get(today).backgroundColor = 0xFFFFFF;
 			today=day;
 		}
