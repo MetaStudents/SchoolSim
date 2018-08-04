@@ -25,6 +25,8 @@
       [10, 4],
       [30, 3]
     ],
+    "project": 100,
+    "exception": [3, 4, 8, 2],
     "title": "Drawing"
   },
   {
@@ -58,6 +60,7 @@
       [30, 3]
     ],
     "project": 1000,
+    "exception": [5],
     "title": "Evolution and Ecology"
   },
   {
@@ -81,6 +84,7 @@
       [60, 10]
     ],
     "project": 0,
+    "exception": [8, 2],
     "title": "EE Lab"
   },
   {
@@ -114,6 +118,7 @@
       [30, 3]
     ],
     "project": 0,
+    "exception": [3, 4],
     "title": "Chem"
   },
   {
@@ -137,6 +142,7 @@
       [60, 10]
     ],
     "project": 0,
+    "exception": [],
     "title": "Chem Lab"
   },
   {
@@ -165,6 +171,7 @@
       [10, 20]
     ],
     "project": 0,
+    "exception": [],
     "title": "How Things Work"
   }
 ]

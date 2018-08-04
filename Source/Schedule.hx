@@ -101,6 +101,10 @@ class Schedule extends Sprite {
 				// If lecture is not held on that day continue to next lecture
 				if (lecture.weekdays.indexOf(j) == -1)
 					continue;
+                if (lecture.exceptions.indexOf(lecture.curLectureNum) != -1){
+                    lecture.curLectureNum++;
+                    continue;
+                }
 				var index = lecture.weekdays.indexOf(j);
 				// If lecture is not held within the range of this week
 				if (!Util.DayinRange(lecture.startDate, lecture.endDate, cursorDate))
@@ -129,6 +133,7 @@ class Schedule extends Sprite {
 				lectureCol.borderColor = 0x000000;
 				lectureCol.width = colWidth;
 				lectureCol.height = h;
+                lecture.curLectureNum++;
 
 				lectureCols.push(lectureCol);
 			}

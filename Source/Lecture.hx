@@ -6,6 +6,7 @@ typedef Lecture = {
     var end:SSDate;
     var homework:Array<Array<Int>>;
     var project:Int;
+    var exception:Array<Int>;
     var title:String;
 }
 
@@ -27,6 +28,8 @@ class LectureObject {
     public var times:Array<String>;
     public var homework:Array<Array<Int>>;
     public var title:String;
+    public var exceptions:Array<Int>;
+    public var curLectureNum:Int;
 
     public function new(lecture:Lecture) {
         var start = Util.splitAndParseInt(lecture.days[0].time.split("-")[0], ":");
@@ -45,5 +48,7 @@ class LectureObject {
         this.endDate = new Date(lecture.end.year, lecture.end.month, lecture.end.day, 0, 0, 0);
         this.homework = lecture.homework;
         this.title = lecture.title;
+        this.exceptions = lecture.exception;
+        this.curLectureNum = 0;
     }
 }
