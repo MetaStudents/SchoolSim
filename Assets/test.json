@@ -6,12 +6,16 @@
         "time": "11:30-13:20"
       },
       {
+        "weekday": 2,
+        "time": "14:00-15:00"
+      },
+      {
         "weekday": 4,
         "time": "13:30-15:20"
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -26,7 +30,7 @@
       [30, 3]
     ],
     "project": 100,
-    "exception": [3, 4, 8, 2],
+    "exception": [3],
     "title": "Drawing"
   },
   {
@@ -42,10 +46,18 @@
       {
         "weekday": 5,
         "time": "10:30-11:20"
+      },
+      {
+        "weekday": 2,
+        "time": "15:00-15:30"
+      },
+      {
+        "weekday": 4,
+        "time": "15:00-15:30"
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -71,7 +83,7 @@
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -84,7 +96,7 @@
       [60, 10]
     ],
     "project": 0,
-    "exception": [8, 2],
+    "exception": [3, 8, 2],
     "title": "EE Lab"
   },
   {
@@ -103,7 +115,7 @@
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -118,7 +130,7 @@
       [30, 3]
     ],
     "project": 0,
-    "exception": [3, 4],
+    "exception": [],
     "title": "Chem"
   },
   {
@@ -129,7 +141,7 @@
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -142,7 +154,7 @@
       [60, 10]
     ],
     "project": 0,
-    "exception": [],
+    "exception": [7, 4],
     "title": "Chem Lab"
   },
   {
@@ -157,7 +169,7 @@
       }
     ],
     "start": {
-      "day": 30,
+      "day": 28,
       "month": 9,
       "year": 2018
     },
@@ -171,7 +183,7 @@
       [10, 20]
     ],
     "project": 0,
-    "exception": [],
+    "exception": [4, 5],
     "title": "How Things Work"
   }
 ]

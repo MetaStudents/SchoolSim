@@ -11,33 +11,34 @@ import haxe.Json;
 import haxe.Timer;
 
 class Main extends Sprite {
-    public static inline var m = 10;
-    public static inline var s1 = 150;
-    public static inline var s2 = 250;
-    public static inline var xM = m;
-    public static inline var yM = m;
-    public static inline var x1 = s1;
-    public static inline var x2 = 800-4*m-s1-s2;
-    public static inline var x3 = s2;
-    public static inline var y1 = s1;
-    public static inline var y2 = 600-3*m-s1;
+	public static inline var m = 10;
+	public static inline var s1 = 150;
+	public static inline var s2 = 250;
+	public static inline var xM = m;
+	public static inline var yM = m;
+	public static inline var x1 = s1;
+	public static inline var x2 = 800-4*m-s1-s2;
+	public static inline var x3 = s2;
+	public static inline var y1 = s1;
+	public static inline var y2 = 600-3*m-s1;
 
-    public var timeScale:Float = 3600*6;
-    public var gameDate:Date; // must be a Sunday
-    public var mscheduleSpr:Calendar;
-    public var wscheduleSpr:Schedule;
-    public var bar1:Bar;
-    public var bar2:Bar;
-    public var bar3:Bar;
-    public var bar4:Bar;
-    public var bar5:Bar;
-    public var bar6:Bar;
-    public var initialTimestamp:Float;
-    public var initialGameTimestamp:Float;
-    public var scheduleObject:Array<Lecture.LectureObject>;
-    public var colors:Array<Int>;
-    
-    public function new () {
+	public var timeScale:Float = 3600*6;
+	public var gameDate:Date; // must be a Sunday
+	public var mscheduleSpr:Calendar;
+	public var wscheduleSpr:Schedule;
+	public var projectSpr:Projects;
+	public var bar1:Bar;
+	public var bar2:Bar;
+	public var bar3:Bar;
+	public var bar4:Bar;
+	public var bar5:Bar;
+	public var bar6:Bar;
+	public var initialTimestamp:Float;
+	public var initialGameTimestamp:Float;
+	public var scheduleObject:Array<Lecture.LectureObject>;
+	public var colors:Array<Int>;
+
+	public function new () {
 		super ();
 
 		var scheduleJson = Assets.getText("assets/test.json");
@@ -131,9 +132,9 @@ class Main extends Sprite {
 		classesSpr.addChild(bar6);
 
 		stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-    }
+	}
 
-    private function onEnterFrame (e:Event){
+	private function onEnterFrame (e:Event){
 		//initialTimeStamp is in seconds, but Date.fromTime takes milliseconds
 		var newGameDate = Date.fromTime(1000*(initialGameTimestamp+timeScale*(Timer.stamp()-initialTimestamp)));
 		//	trace(timeScale*(wut-initialTimeStamp));
@@ -147,6 +148,6 @@ class Main extends Sprite {
 		bar4.update(gameDate, delta);
 		bar5.update(gameDate, delta);
 		bar6.update(gameDate, delta);
-    }
-	
+	}
+
 }

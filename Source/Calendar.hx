@@ -7,18 +7,18 @@ import haxe.ds.HashMap;
 
 class Calendar extends Sprite {
 
-    private var cells:HashMap<Day,TextField> = new HashMap();
-    private var weekdayHeight = 15;
-    private var today:Day;
-    
-    private var xOffset:Int;
-    private var yOffset:Int;
-    private var cellWidth:Int;
-    private var cellHeight:Int;
-    private var rows:Int;
-    private var endDate:Date; //first date not in calendar
-    
-    public function new(width, height, date:Date){
+	private var cells:HashMap<Day,TextField> = new HashMap();
+	private var weekdayHeight = 15;
+	private var today:Day;
+
+	private var xOffset:Int;
+	private var yOffset:Int;
+	private var cellWidth:Int;
+	private var cellHeight:Int;
+	private var rows:Int;
+	private var endDate:Date; //first date not in calendar
+
+	public function new(width, height, date:Date){
 		super();
 		today = Day.fromDate(date);
 		//round down to nearest Sunday to get endDate because nothing in calendar yet
@@ -33,9 +33,9 @@ class Calendar extends Sprite {
 		makeGrid();
 		makeWeekdays();
 		cells.get(today).backgroundColor = 0xEE5D15;
-    }
+	}
 
-    private function makeRow (rowNum){
+	private function makeRow (rowNum){
 		for (j in 0...7){
 			
 			var cell:TextField = new TextField();
@@ -64,15 +64,15 @@ class Calendar extends Sprite {
 			
 			endDate = DateTools.delta(endDate, 24*3600*1000);//DateTools.days(1));
 		}
-    }
+	}
 
-    private function makeGrid(){
+	private function makeGrid(){
 		for (i in 0...rows){
 			makeRow(i);
 		}
-    }
+	}
 
-    private function advanceGrid(){
+	private function advanceGrid(){
 		for (cell in cells){
 			if (cell.y <= yOffset){
 				removeChild(cell);
@@ -81,9 +81,9 @@ class Calendar extends Sprite {
 			}
 		}
 		makeRow(rows-1);
-    }
+	}
 
-    private function makeWeekdays() {
+	private function makeWeekdays() {
 		var names:Array<String> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 		for (i in 0...7) {
 			var weekday:TextField = new TextField();
@@ -93,9 +93,9 @@ class Calendar extends Sprite {
 			weekday.x = xOffset + i*cellWidth;
 			weekday.y = yOffset - 15;
 		}
-    }
+	}
 
-    public function update(gameDate:Date) {
+	public function update(gameDate:Date) {
 		//trace("hi");
 		var day = Day.fromDate(gameDate);
 		//trace(today.month+" "+today.day);
@@ -108,5 +108,5 @@ class Calendar extends Sprite {
 			cells.get(today).backgroundColor = 0xFFFFFF;
 			today=day;
 		}
-    }
+	}
 }
