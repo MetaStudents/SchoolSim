@@ -62,6 +62,7 @@ class Bar extends Sprite {
 	}
 
 	private function getHomework(gameDate:Date) {
+		if (lectureEndDate == null) return;
 		if (currentHomework < lectures.homework.length) {
 			if (gameDate.getTime() < lectures.endDate.getTime() && gameDate.getTime() > lectureEndDate.getTime()) {
 				lectures.homework[currentHomework][1]--;

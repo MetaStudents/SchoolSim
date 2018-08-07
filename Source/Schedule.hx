@@ -100,6 +100,7 @@ class Schedule extends Sprite {
 				// If lecture is not held on that day continue to next lecture
 				if (lecture.exceptions.indexOf(lecCursor) != -1) {
 					lecCursor++;
+					if (lecture.weekdays.length == 1) break;
 					continue;
 				}
 				var index = lecCursor % lecture.weekdays.length;
@@ -108,8 +109,12 @@ class Schedule extends Sprite {
 				var date = DateTools.delta(sunday, DateTools.days(weekday) + DateTools.hours(start[0]) + DateTools.minutes(start[1]));
 
 				// If lecture is not held within the range of this week
-				if (!Util.DayinRange(lecture.startDate, lecture.endDate, date))
+				if (!Util.DayinRange(lecture.startDate, lecture.endDate, date)){
+					lecCursor++;
+					if (lecture.weekdays.length == 1) break;
 					continue;
+				}
+
 				// Lecture will be added since it is on this day in range
 
 				var end = lecture.times[index].end;
