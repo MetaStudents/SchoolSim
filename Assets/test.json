@@ -1,0 +1,189 @@
+[
+  {
+    "days": [
+      {
+        "weekday": 2,
+        "time": "11:30-13:20"
+      },
+      {
+        "weekday": 2,
+        "time": "14:00-15:00"
+      },
+      {
+        "weekday": 4,
+        "time": "13:30-15:20"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [20, 6],
+      [10, 4],
+      [30, 3]
+    ],
+    "project": 100,
+    "exception": [3],
+    "title": "Drawing"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "10:30-11:20"
+      },
+      {
+        "weekday": 3,
+        "time": "10:30-11:20"
+      },
+      {
+        "weekday": 5,
+        "time": "10:30-11:20"
+      },
+      {
+        "weekday": 2,
+        "time": "15:00-15:30"
+      },
+      {
+        "weekday": 4,
+        "time": "15:00-15:30"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [25, 6],
+      [5, 4],
+      [30, 3]
+    ],
+    "project": 1000,
+    "exception": [5],
+    "title": "Evolution and Ecology"
+  },
+  {
+    "days": [
+      {
+        "weekday": 2,
+        "time": "17:00-19:50"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [60, 10]
+    ],
+    "project": 0,
+    "exception": [3, 8, 2],
+    "title": "EE Lab"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "9:30-10:20"
+      },
+      {
+        "weekday": 3,
+        "time": "9:30-10:20"
+      },
+      {
+        "weekday": 5,
+        "time": "9:30-10:20"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [25, 6],
+      [5, 4],
+      [30, 3]
+    ],
+    "project": 0,
+    "exception": [],
+    "title": "Chem"
+  },
+  {
+    "days": [
+      {
+        "weekday": 1,
+        "time": "18:00-20:50"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [60, 10]
+    ],
+    "project": 0,
+    "exception": [7, 4],
+    "title": "Chem Lab"
+  },
+  {
+    "days": [
+      {
+        "weekday": 2,
+        "time": "15:30-16:50"
+      },
+      {
+        "weekday": 4,
+        "time": "15:30-16:50"
+      }
+    ],
+    "start": {
+      "day": 28,
+      "month": 9,
+      "year": 2018
+    },
+    "end": {
+      "day": 1,
+      "month": 11,
+      "year": 2018
+    },
+    "homework": [
+      [0, 2],
+      [10, 20]
+    ],
+    "project": 0,
+    "exception": [4, 5],
+    "title": "How Things Work"
+  }
+]
