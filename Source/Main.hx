@@ -35,7 +35,7 @@ class Main extends Sprite {
 	public var bar6:Bar;
 	public var initialTimestamp:Float;
 	public var initialGameTimestamp:Float;
-	public var scheduleObject:Array<Lecture.LectureObject>;
+	public var scheduleObject:Array<Lecture.LectureIterator>;
 	public var colors:Array<Int>;
 
 	public function new () {
@@ -43,9 +43,11 @@ class Main extends Sprite {
 
 		var scheduleJson = Assets.getText("assets/test.json");
 		var lectureArray:Array<Lecture> = Json.parse(scheduleJson);
-		var scheduleObject:Array<Lecture.LectureObject> = new Array<Lecture.LectureObject>();
+		var scheduleObject:Array<Lecture.LectureIterator> = new Array<Lecture.LectureIterator>();
+		var scheduleObjectCopy:Array<Lecture.LectureIterator> = new Array<Lecture.LectureIterator>();
 		for (lecture in lectureArray){
-			scheduleObject.push(new Lecture.LectureObject(lecture));
+			scheduleObject.push(new Lecture.LectureIterator(lecture));
+			scheduleObjectCopy.push(new Lecture.LectureIterator(lecture));
 		}
 
 		colors = [0xFF7800, 0x00FF00, 0x5555FF, 0xFFFF00, 0xFF00FF, 0xE3D3FF];
@@ -106,22 +108,22 @@ class Main extends Sprite {
 		this.addChild(classesSpr);
 		this.addChild(wscheduleSpr);
 
-		bar1 = new Bar(0.04, 100, 0, "Drawing", scheduleObject[0], gameDate, colors[0]);
+		bar1 = new Bar(0.04, 100, 0, "Drawing", scheduleObjectCopy[0], gameDate, colors[0]);
 		bar1.x = Math.round(x2/7);
 		bar1.y = y2;
-		bar2 = new Bar(0.2, 100, 0, "Evolution and Ecology", scheduleObject[1], gameDate, colors[1]);
+		bar2 = new Bar(0.2, 100, 0, "Evolution and Ecology", scheduleObjectCopy[1], gameDate, colors[1]);
 		bar2.x = Math.round(2*x2/7);
 		bar2.y = y2;
-		bar3 = new Bar(0.2, 100, 0, "EE Lab", scheduleObject[2], gameDate, colors[2]);
+		bar3 = new Bar(0.2, 100, 0, "EE Lab", scheduleObjectCopy[2], gameDate, colors[2]);
 		bar3.x = Math.round(3*x2/7);
 		bar3.y = y2;
-		bar4 = new Bar(0.2, 100, 0, "Chem", scheduleObject[3], gameDate, colors[3]);
+		bar4 = new Bar(0.2, 100, 0, "Chem", scheduleObjectCopy[3], gameDate, colors[3]);
 		bar4.x = Math.round(4*x2/7);
 		bar4.y = y2;
-		bar5 = new Bar(0.04, 100, 0, "Chem Lab", scheduleObject[4], gameDate, colors[4]);
+		bar5 = new Bar(0.04, 100, 0, "Chem Lab", scheduleObjectCopy[4], gameDate, colors[4]);
 		bar5.x = Math.round(5*x2/7);
 		bar5.y = y2;
-		bar6 = new Bar(0.01, 100, 0, "How Things Work", scheduleObject[5], gameDate, colors[5]);
+		bar6 = new Bar(0.01, 100, 0, "How Things Work", scheduleObjectCopy[5], gameDate, colors[5]);
 		bar6.x = Math.round(6*x2/7);
 		bar6.y = y2;
 		classesSpr.addChild(bar1);

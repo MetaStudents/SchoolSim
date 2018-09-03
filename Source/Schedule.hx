@@ -1,5 +1,6 @@
 package;
 
+import Lecture.LectureObject;
 import openfl.display.Sprite;
 import openfl.display.Shape;
 import openfl.text.TextFormat;
@@ -21,13 +22,13 @@ class Schedule extends Sprite {
 	private var cursor:Shape;
 	private var week:Int;
 
-	private var scheduleObject:Array<Lecture.LectureObject>;
+	private var scheduleObject:Array<Lecture.LectureIterator>;
 	private var colors:Array<Int>;
 
 	private var textHeight:Int;
 	private var format:TextFormat;
 
-	public function new(width, height, date:Date, scheduleObject:Array<Lecture.LectureObject>, colors:Array<Int> = null) {
+	public function new(width, height, date:Date, scheduleObject:Array<Lecture.LectureIterator>, colors:Array<Int> = null) {
 		super();
 
 		this.scheduleObject = scheduleObject;
@@ -61,6 +62,8 @@ class Schedule extends Sprite {
 		this.addChild(cursor);
 
 		week = -1;
+
+		for (lectures in scheduleObject) lectures.next();
 		makeCols();
 		makeWeekdays();
 		makeTimes();
@@ -93,50 +96,35 @@ class Schedule extends Sprite {
 			endDate = DateTools.delta(endDate, DateTools.days(1));
 		}
 
-		var sunday = DateTools.delta(endDate, -DateTools.days(7));
-		for (lecture in scheduleObject) {
-			var lecCursor:Int = lecture.curLectureNum;
-			do {
-				// If lecture is not held on that day continue to next lecture
-				if (lecture.exceptions.indexOf(lecCursor) != -1) {
-					lecCursor++;
-					continue;
-				}
-				var index = lecCursor % lecture.weekdays.length;
-				var weekday = lecture.weekdays[index];
-				var start = lecture.times[index].start;
-				var date = DateTools.delta(sunday, DateTools.days(weekday) + DateTools.hours(start[0]) + DateTools.minutes(start[1]));
+		var lecture:LectureObject;
+		for (lectures in scheduleObject) {
+			lecture = lectures.getCurLecture();
+			while (lecture != null) {
+				if (lecture.startTime.getTime() >= endDate.getTime()) break;
 
-				// If lecture is not held within the range of this week
-				if (!Util.DayinRange(lecture.startDate, lecture.endDate, date))
-					continue;
-				// Lecture will be added since it is on this day in range
-
-				var end = lecture.times[index].end;
-				var startFrac = (start[0] + start[1] / 60) / 24;
+				var startFrac = (lecture.startTime.getHours() + lecture.startTime.getMinutes() / 60) / 24;
 				var yPos = yOffset + colHeight * startFrac;
-				var xPos = xOffset + weekday * colWidth;
+				var xPos = xOffset + lecture.startTime.getDay() * colWidth;
 
-				var endFrac = (end[0] + end[1] / 60) / 24;
+				var endFrac = (lecture.endTime.getHours() + lecture.endTime.getMinutes() / 60) / 24;
 				var h = colHeight * (endFrac - startFrac);
 				var lectureCol = new TextField();
 				addChild(lectureCol);
 
 				lectureCol.x = xPos;
 				lectureCol.y = yPos;
-				lectureCol.text = lecture.title;
+				lectureCol.text = lectures.title;
 
 				lectureCol.background = true;
-				lectureCol.backgroundColor = colors[scheduleObject.indexOf(lecture)];
+				lectureCol.backgroundColor = colors[scheduleObject.indexOf(lectures)];
 				lectureCol.border = true;
 				lectureCol.borderColor = 0x000000;
 				lectureCol.width = colWidth;
 				lectureCol.height = h;
-				lecCursor++;
 
 				lectureCols.push(lectureCol);
-				if (lecture.weekdays.length == 1) break;
-			} while (lecture.weekdays[lecCursor % lecture.weekdays.length] >= lecture.weekdays[(lecCursor - 1) % lecture.weekdays.length]);
+				lecture = lectures.next();
+			}
 		}
 		this.addChild(cursor);
 	}
