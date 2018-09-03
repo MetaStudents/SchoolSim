@@ -26,7 +26,6 @@ class Main extends Sprite {
 	public var gameDate:Date; // must be a Sunday
 	public var mscheduleSpr:Calendar;
 	public var wscheduleSpr:Schedule;
-	public var projectSpr:Projects;
 	public var bar1:Bar;
 	public var bar2:Bar;
 	public var bar3:Bar;
